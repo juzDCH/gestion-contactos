@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Contactos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📋 Gestión de Contactos</h1>
+        <nav>
+            <button onclick="mostrarSeccion('personas')" class="nav-btn active" id="btn-personas">👥 Personas</button>
+            <button onclick="mostrarSeccion('grupos')" class="nav-btn" id="btn-grupos">🗂️ Grupos</button>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN PERSONAS -->
+    <section id="seccion-personas">
+        <div class="toolbar">
+            <h2>Lista de Personas</h2>
+            <button onclick="abrirModalPersona()" class="btn-primary">+ Nueva Persona</button>
+        </div>
+        <div id="lista-personas" class="grid-cards"></div>
+    </section>
+
+    <!-- SECCIÓN GRUPOS -->
+    <section id="seccion-grupos" style="display:none">
+        <div class="toolbar">
+            <h2>Lista de Grupos</h2>
+            <button onclick="abrirModalGrupo()" class="btn-primary">+ Nuevo Grupo</button>
+        </div>
+        <div id="lista-grupos" class="tabla-container"></div>
+    </section>
+
+    <!-- MODAL PERSONA -->
+    <div id="modal-persona" class="modal" style="display:none">
+        <div class="modal-content">
+            <h3 id="titulo-modal-persona">Nueva Persona</h3>
+            <form id="form-persona" enctype="multipart/form-data">
+                <input type="hidden" id="persona-id">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nombres *</label>
+                        <input type="text" id="p-nombres" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos *</label>
+                        <input type="text" id="p-apellidos" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo</label>
+                        <input type="email" id="p-correo">
+                    </div>
+                    <div class="form-group">
+                        <label>Nro. Celular</label>
+                        <input type="text" id="p-celular">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Dirección</label>
+                        <input type="text" id="p-direccion">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Observaciones</label>
+                        <textarea id="p-observaciones" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Grupo *</label>
+                        <select id="p-grupo" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="p-activo">
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Fotografía</label>
+                        <input type="file" id="p-foto" accept="image/*">
+                        <img id="preview-foto" src="" style="display:none; width:100px; margin-top:8px; border-radius:8px;">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="cerrarModal('modal-persona')" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL GRUPO -->
+    <div id="modal-grupo" class="modal" style="display:none">
+        <div class="modal-content small">
+            <h3 id="titulo-modal-grupo">Nuevo Grupo</h3>
+            <form id="form-grupo">
+                <input type="hidden" id="grupo-id">
+                <div class="form-group">
+                    <label>Nombre del Grupo *</label>
+                    <input type="text" id="g-nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="g-activo">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="cerrarModal('modal-grupo')" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay" style="display:none" onclick="cerrarTodosModales()"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
